@@ -21,86 +21,105 @@
         android:useDefaultMargins="true">
 
         <TextView
+            android:id="@+id/result_text_tv"
             android:layout_columnSpan="4"
             android:layout_gravity="fill_horizontal"
             android:background="@color/white"
-            android:textColor="@color/white"
+            android:textColor="@color/teal_700"
             android:textSize="36sp">
         </TextView>
 
         <Button
+            android:id="@+id/button_divide"
             android:text="@string/button_divide"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_multiply"
             android:text="@string/button_multiply"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_minus"
             android:text="@string/button_minus"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_plus"
             android:text="@string/button_plus"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_seven"
             android:text="@string/button_7"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_eight"
             android:text="@string/button_8"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_nine"
             android:text="@string/button_9"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_delete"
             android:layout_rowSpan="2"
             android:layout_gravity="fill"
             android:text="@string/button_CE"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_four"
             android:text="@string/button_4"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_five"
             android:text="@string/button_5"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_six"
             android:text="@string/button_6"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_one"
             android:text="@string/button_1"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_two"
             android:text="@string/button_2"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_three"
             android:text="@string/button_3"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_equal"
             android:layout_rowSpan="2"
             android:layout_gravity="fill_vertical"
             android:text="@string/button_equal"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_zero"
             android:text="@string/button_0"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_dot"
             android:text="@string/button_dot"
             android:textSize="26sp" />
 
         <Button
+            android:id="@+id/button_double_zero"
             android:text="@string/button_00"
             android:textSize="26sp" />
 
