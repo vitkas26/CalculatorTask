@@ -14,9 +14,9 @@
     <GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
         android:layout_gravity="center"
         android:columnCount="4"
+        android:padding="10dp"
         android:rowCount="6"
         android:useDefaultMargins="true">
 
@@ -26,8 +26,7 @@
             android:layout_gravity="fill_horizontal"
             android:background="@color/white"
             android:textColor="@color/teal_700"
-            android:textSize="36sp">
-        </TextView>
+            android:textSize="36sp"/>
 
         <Button
             android:id="@+id/button_divide"
@@ -121,6 +120,13 @@
         <Button
             android:id="@+id/button_double_zero"
             android:text="@string/button_00"
+            android:textSize="26sp" />
+
+        <Button
+            android:id="@+id/button_see_result"
+            android:layout_gravity="fill_horizontal"
+            android:layout_columnSpan="4"
+            android:text="@string/see_result"
             android:textSize="26sp" />
 
     </GridLayout>

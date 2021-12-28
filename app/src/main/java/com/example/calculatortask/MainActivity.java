@@ -1,7 +1,9 @@
 package com.example.calculatortask;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +14,11 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "###";
+    private static String BUNDLE_KEY = "saveNumberToBundle";
+    private static int numberOne;
+    private static int numberTwo;
+    private static int sum;
+
     private TextView resultTv;
     private Button buttonOne;
     private Button buttonTwo;
@@ -25,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonZero;
     private Button buttonDoubleZero;
     private Button buttonDelete;
+    private Button buttonDot;
+    private Button seeResultBt;
+    private Numbers savedResult = new Numbers();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +42,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         initializeViews();
+
+        if (savedInstanceState != null && savedInstanceState.containsKey(BUNDLE_KEY)) {
+            savedResult = savedInstanceState.getParcelable(BUNDLE_KEY);
+            resultTv.setText(savedResult.getLastValue());
+        }
+
         setListeners();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        savedResult.setLastValue(resultTv.getText().toString());
+        outState.putParcelable(BUNDLE_KEY, savedResult);
+        Log.d(TAG, "onSaveInstanceState() called with: outState = [" + outState + "]");
     }
 
     private void initializeViews() {
@@ -49,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         buttonZero = findViewById(R.id.button_zero);
         buttonDoubleZero = findViewById(R.id.button_double_zero);
         buttonDelete = findViewById(R.id.button_delete);
+        buttonDot = findViewById(R.id.button_dot);
+        seeResultBt = findViewById(R.id.button_see_result);
 
     }
 
@@ -65,6 +91,13 @@ public class MainActivity extends AppCompatActivity {
         buttonZero.setOnClickListener(this::onNumberButtonClick);
         buttonDoubleZero.setOnClickListener(this::onNumberButtonClick);
         buttonDelete.setOnClickListener(this::onNumberButtonClick);
+        buttonDot.setOnClickListener(this::onNumberButtonClick);
+        seeResultBt.setOnClickListener(v-> {
+                Intent intent = new Intent(this, SecondActivity.class);
+                savedResult.setLastValue(resultTv.getText().toString());
+                intent.putExtra("resultFromMain",savedResult);
+                startActivity(intent);
+        });
     }
 
     private void onNumberButtonClick(View view) {
@@ -72,6 +105,12 @@ public class MainActivity extends AppCompatActivity {
         String buttonNumber = b.getText().toString();
         if (b.getId() == R.id.button_delete) {
             deleteLastCharacter();
+        } else if (b.getId() == R.id.button_dot) {
+            if (!resultTv.getText().toString().contains(".")) {
+                resultTv.append(buttonNumber);
+            } else{
+                Toast.makeText(this, "Dot is exist!", Toast.LENGTH_SHORT).show();
+            }
         } else {
             resultTv.append(buttonNumber);
         }
