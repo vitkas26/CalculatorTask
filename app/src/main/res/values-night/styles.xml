@@ -2,37 +2,37 @@
 <resources>
 
     <style name="operation_buttons">
-        <item name="backgroundTint">@color/calculator_operation_button</item>
+        <item name="backgroundTint">@color/teal_200</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
         <item name="strokeWidth">@dimen/button_stroke_size</item>
-        <item name="strokeColor">@color/button_stroke</item>
+        <item name="strokeColor">@color/white</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:layout_width">@dimen/button_width</item>
     </style>
 
     <style name="number_buttons">
-        <item name="backgroundTint">@color/calculator_button</item>
+        <item name="backgroundTint">@color/purple_200</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
         <item name="strokeWidth">@dimen/button_stroke_size</item>
-        <item name="strokeColor">@color/button_stroke</item>
+        <item name="strokeColor">@color/white</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:layout_width">@dimen/button_width</item>
     </style>
 
     <style name="big_button">
-        <item name="backgroundTint">@color/calculator_big_button</item>
+        <item name="backgroundTint">@color/calculator_operation_button</item>
         <item name="cornerRadius">@dimen/button_big_corner_radius</item>
         <item name="strokeWidth">@dimen/button_stroke_size</item>
-        <item name="strokeColor">@color/button_stroke</item>
+        <item name="strokeColor">@color/white</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:layout_width">@dimen/button_width</item>
     </style>
 
     <style name="see_result_button">
-        <item name="backgroundTint">@color/calculator_operation_button</item>
+        <item name="backgroundTint">@color/white</item>
         <item name="cornerRadius">@dimen/button_corner_radius</item>
         <item name="strokeWidth">@dimen/button_stroke_size</item>
-        <item name="strokeColor">@color/button_stroke</item>
+        <item name="strokeColor">@color/black</item>
         <item name="android:textSize">@dimen/button_text_size</item>
         <item name="android:layout_width">@dimen/button_width</item>
     </style>
