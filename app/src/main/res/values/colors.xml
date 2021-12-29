@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="calculator_operation_button">#FF5722</color>
+    <color name="calculator_button">#686868</color>
+    <color name="calculator_big_button">#468300</color>
+    <color name="button_stroke">#E3BEBE</color>
 </resources>
