@@ -1,21 +1,23 @@
 <resources>
     <string name="app_name">CalculatorTask</string>
-    <string name="button_0">0</string>
-    <string name="button_1">1</string>
-    <string name="button_2">2</string>
-    <string name="button_3">3</string>
-    <string name="button_4">4</string>
-    <string name="button_5">5</string>
-    <string name="button_6">6</string>
-    <string name="button_7">7</string>
-    <string name="button_8">8</string>
-    <string name="button_9">9</string>
-    <string name="button_divide">/</string>
-    <string name="button_multiply">*</string>
-    <string name="button_minus">-</string>
-    <string name="button_plus">+</string>
-    <string name="button_CE">CE</string>
-    <string name="button_dot">.</string>
-    <string name="button_00">00</string>
-    <string name="button_equal">=</string>
+    <string name="number_zero_button">0</string>
+    <string name="number_one_button">1</string>
+    <string name="number_two_button">2</string>
+    <string name="number_three_button">3</string>
+    <string name="number_four_button">4</string>
+    <string name="number_five_button">5</string>
+    <string name="number_six_button">6</string>
+    <string name="number_seven_button">7</string>
+    <string name="number_eight_button">8</string>
+    <string name="number_nine_button">9</string>
+    <string name="operation_division_button">/</string>
+    <string name="operation_multiplication_button">*</string>
+    <string name="operation_subtraction_button">-</string>
+    <string name="operation_addition_button">+</string>
+    <string name="operation_clear_button">CE</string>
+    <string name="dot_button">.</string>
+    <string name="number_double_zero_button">00</string>
+    <string name="operation_equal_button">=</string>
+    <string name="see_result_button">See Result</string>
+    <string name="calculated_result_text_view">RESULT</string>
 </resources>
