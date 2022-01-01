@@ -19,7 +19,7 @@ public class SecondActivity extends AppCompatActivity {
         Log.d(TAG, "onCreate() called with: savedInstanceState = [" + savedInstanceState + "]");
         setContentView(R.layout.activity_second);
 
-        secondActivityResultTv = findViewById(R.id.result_text_second_activity_tv);
+        secondActivityResultTv = findViewById(R.id.calculated_result_text_view);
         resultText = getIntent().getExtras().getParcelable("resultFromMain");
         secondActivityResultTv.setText(resultText.getLastValue());
     }

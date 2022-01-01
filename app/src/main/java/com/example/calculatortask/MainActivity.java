@@ -14,26 +14,23 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "###";
-    private static String BUNDLE_KEY = "saveNumberToBundle";
-    private static int numberOne;
-    private static int numberTwo;
-    private static int sum;
+    private static final String BUNDLE_KEY = "saveNumberToBundle";
 
-    private TextView resultTv;
-    private Button buttonOne;
-    private Button buttonTwo;
-    private Button buttonThree;
-    private Button buttonFour;
-    private Button buttonFive;
-    private Button buttonSix;
-    private Button buttonSeven;
-    private Button buttonEight;
-    private Button buttonNine;
-    private Button buttonZero;
-    private Button buttonDoubleZero;
-    private Button buttonDelete;
-    private Button buttonDot;
-    private Button seeResultBt;
+    private TextView calculatedResultTextView;
+    private Button numberOneButton;
+    private Button numberTwoButton;
+    private Button numberThreeButton;
+    private Button numberFourButton;
+    private Button numberFiveButton;
+    private Button numberSixButton;
+    private Button numberSevenButton;
+    private Button numberEightButton;
+    private Button numberNineButton;
+    private Button numberZeroButton;
+    private Button numberDoubleZeroButton;
+    private Button operationClearButton;
+    private Button dotButton;
+    private Button seeResultButton;
     private Numbers savedResult = new Numbers();
 
     @Override
@@ -45,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null && savedInstanceState.containsKey(BUNDLE_KEY)) {
             savedResult = savedInstanceState.getParcelable(BUNDLE_KEY);
-            resultTv.setText(savedResult.getLastValue());
+            calculatedResultTextView.setText(savedResult.getLastValue());
         }
 
         setListeners();
@@ -54,47 +51,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        savedResult.setLastValue(resultTv.getText().toString());
+        savedResult.setLastValue(calculatedResultTextView.getText().toString());
         outState.putParcelable(BUNDLE_KEY, savedResult);
         Log.d(TAG, "onSaveInstanceState() called with: outState = [" + outState + "]");
     }
 
     private void initializeViews() {
-        resultTv = findViewById(R.id.result_text_tv);
-        buttonOne = findViewById(R.id.button_one);
-        buttonTwo = findViewById(R.id.button_two);
-        buttonThree = findViewById(R.id.button_three);
-        buttonFour = findViewById(R.id.button_four);
-        buttonFive = findViewById(R.id.button_five);
-        buttonSix = findViewById(R.id.button_six);
-        buttonSeven = findViewById(R.id.button_seven);
-        buttonEight = findViewById(R.id.button_eight);
-        buttonNine = findViewById(R.id.button_nine);
-        buttonZero = findViewById(R.id.button_zero);
-        buttonDoubleZero = findViewById(R.id.button_double_zero);
-        buttonDelete = findViewById(R.id.button_delete);
-        buttonDot = findViewById(R.id.button_dot);
-        seeResultBt = findViewById(R.id.button_see_result);
+        calculatedResultTextView = findViewById(R.id.calculated_result_text_view);
+        numberOneButton = findViewById(R.id.number_one_button);
+        numberTwoButton = findViewById(R.id.number_two_button);
+        numberThreeButton = findViewById(R.id.number_three_button);
+        numberFourButton = findViewById(R.id.number_four_button);
+        numberFiveButton = findViewById(R.id.number_five_button);
+        numberSixButton = findViewById(R.id.number_six_button);
+        numberSevenButton = findViewById(R.id.number_seven_button);
+        numberEightButton = findViewById(R.id.number_eight_button);
+        numberNineButton = findViewById(R.id.number_nine_button);
+        numberZeroButton = findViewById(R.id.number_zero_button);
+        numberDoubleZeroButton = findViewById(R.id.number_double_zero_button);
+        operationClearButton = findViewById(R.id.operation_clear_button);
+        dotButton = findViewById(R.id.dot_button);
+        seeResultButton = findViewById(R.id.see_result_button);
 
     }
 
     private void setListeners() {
-        buttonOne.setOnClickListener(this::onNumberButtonClick);
-        buttonTwo.setOnClickListener(this::onNumberButtonClick);
-        buttonThree.setOnClickListener(this::onNumberButtonClick);
-        buttonFour.setOnClickListener(this::onNumberButtonClick);
-        buttonFive.setOnClickListener(this::onNumberButtonClick);
-        buttonSix.setOnClickListener(this::onNumberButtonClick);
-        buttonSeven.setOnClickListener(this::onNumberButtonClick);
-        buttonEight.setOnClickListener(this::onNumberButtonClick);
-        buttonNine.setOnClickListener(this::onNumberButtonClick);
-        buttonZero.setOnClickListener(this::onNumberButtonClick);
-        buttonDoubleZero.setOnClickListener(this::onNumberButtonClick);
-        buttonDelete.setOnClickListener(this::onNumberButtonClick);
-        buttonDot.setOnClickListener(this::onNumberButtonClick);
-        seeResultBt.setOnClickListener(v-> {
+        numberOneButton.setOnClickListener(this::onNumberButtonClick);
+        numberTwoButton.setOnClickListener(this::onNumberButtonClick);
+        numberThreeButton.setOnClickListener(this::onNumberButtonClick);
+        numberFourButton.setOnClickListener(this::onNumberButtonClick);
+        numberFiveButton.setOnClickListener(this::onNumberButtonClick);
+        numberSixButton.setOnClickListener(this::onNumberButtonClick);
+        numberSevenButton.setOnClickListener(this::onNumberButtonClick);
+        numberEightButton.setOnClickListener(this::onNumberButtonClick);
+        numberNineButton.setOnClickListener(this::onNumberButtonClick);
+        numberZeroButton.setOnClickListener(this::onNumberButtonClick);
+        numberDoubleZeroButton.setOnClickListener(this::onNumberButtonClick);
+        operationClearButton.setOnClickListener(this::onNumberButtonClick);
+        dotButton.setOnClickListener(this::onNumberButtonClick);
+        seeResultButton.setOnClickListener(v-> {
                 Intent intent = new Intent(this, SecondActivity.class);
-                savedResult.setLastValue(resultTv.getText().toString());
+                savedResult.setLastValue(calculatedResultTextView.getText().toString());
                 intent.putExtra("resultFromMain",savedResult);
                 startActivity(intent);
         });
@@ -103,24 +100,24 @@ public class MainActivity extends AppCompatActivity {
     private void onNumberButtonClick(View view) {
         Button b = (Button) view;
         String buttonNumber = b.getText().toString();
-        if (b.getId() == R.id.button_delete) {
+        if (b.getId() == R.id.operation_clear_button) {
             deleteLastCharacter();
-        } else if (b.getId() == R.id.button_dot) {
-            if (!resultTv.getText().toString().contains(".")) {
-                resultTv.append(buttonNumber);
+        } else if (b.getId() == R.id.dot_button) {
+            if (!calculatedResultTextView.getText().toString().contains(".")) {
+                calculatedResultTextView.append(buttonNumber);
             } else{
                 Toast.makeText(this, "Dot is exist!", Toast.LENGTH_SHORT).show();
             }
         } else {
-            resultTv.append(buttonNumber);
+            calculatedResultTextView.append(buttonNumber);
         }
     }
 
     private void deleteLastCharacter() {
-        String toRemove = resultTv.getText().toString();
+        String toRemove = calculatedResultTextView.getText().toString();
         try {
             String editedText = toRemove.substring(0, toRemove.length() - 1);
-            resultTv.setText(editedText);
+            calculatedResultTextView.setText(editedText);
         } catch (Exception e) {
             Toast.makeText(this, "Field is empty", Toast.LENGTH_SHORT).show();
         }
