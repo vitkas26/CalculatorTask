@@ -1,4 +1,4 @@
-package com.example.calculatortask;
+package com.example.calculatortask.domain.entities;
 
 import android.os.Parcel;
 import android.os.Parcelable;

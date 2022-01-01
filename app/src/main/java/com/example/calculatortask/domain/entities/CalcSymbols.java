@@ -1,4 +1,4 @@
-package com.example.calculatortask;
+package com.example.calculatortask.domain.entities;
 
 public enum CalcSymbols {
     NUM_1,NUM_2,NUM_3,NUM_4,
@@ -6,5 +6,4 @@ public enum CalcSymbols {
     NUM_9,NUM_0,NUM_00,DOT,
     OP_PLUS,OP_MINUS,OP_MULTIPLY,
     OP_DIVIDE,CLEAR, EQUAL,
-    UNDEFINED
 }

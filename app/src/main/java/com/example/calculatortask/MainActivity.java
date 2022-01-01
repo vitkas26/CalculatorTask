@@ -10,37 +10,38 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.calculatortask.domain.CalculatorModel;
+import com.example.calculatortask.domain.entities.CalcSymbols;
+import com.example.calculatortask.domain.entities.Numbers;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "###";
     private static String BUNDLE_KEY = "saveNumberToBundle";
-    private static int numberOne;
-    private static int numberTwo;
-    private static int sum;
 
-    private TextView resultTv;
-    private Button buttonOne;
-    private Button buttonTwo;
-    private Button buttonThree;
-    private Button buttonFour;
-    private Button buttonFive;
-    private Button buttonSix;
-    private Button buttonSeven;
-    private Button buttonEight;
-    private Button buttonNine;
-    private Button buttonZero;
-    private Button buttonDoubleZero;
-    private Button buttonDelete;
-    private Button buttonDot;
-    private Button buttonPlus;
-    private Button buttonMinus;
-    private Button buttonMultiply;
-    private Button buttonDivide;
-    private Button seeResultBt;
+    private TextView calculatedResultTextView;
+    private Button numberOneButton;
+    private Button numberTwoButton;
+    private Button numberThreeButton;
+    private Button numberFourButton;
+    private Button numberFiveButton;
+    private Button numberSixButton;
+    private Button numberSevenButton;
+    private Button numberEightButton;
+    private Button numberNineButton;
+    private Button numberZeroButton;
+    private Button numberDoubleZeroButton;
+    private Button operationClearButton;
+    private Button dotButton;
+    private Button operationAdditionButton;
+    private Button operationSubtractionButton;
+    private Button operationMultiplicationButton;
+    private Button operationDivisionButton;
+    private Button seeResultButton;
     private Numbers savedResult = new Numbers();
-    private CalcModel calcModel = new CalcModel();
+    private CalculatorModel calcModel = new CalculatorModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null && savedInstanceState.containsKey(BUNDLE_KEY)) {
             savedResult = savedInstanceState.getParcelable(BUNDLE_KEY);
-            resultTv.setText(savedResult.getLastValue());
+            calculatedResultTextView.setText(savedResult.getLastValue());
         }
 
         setListeners();
@@ -65,65 +66,65 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        savedResult.setLastValue(resultTv.getText().toString());
+        savedResult.setLastValue(calculatedResultTextView.getText().toString());
         outState.putParcelable(BUNDLE_KEY, savedResult);
         Log.d(TAG, "onSaveInstanceState() called with: outState = [" + outState + "]");
     }
 
     private void initializeViews() {
-        resultTv = findViewById(R.id.result_text_tv);
-        buttonOne = findViewById(R.id.button_one);
-        buttonTwo = findViewById(R.id.button_two);
-        buttonThree = findViewById(R.id.button_three);
-        buttonFour = findViewById(R.id.button_four);
-        buttonFive = findViewById(R.id.button_five);
-        buttonSix = findViewById(R.id.button_six);
-        buttonSeven = findViewById(R.id.button_seven);
-        buttonEight = findViewById(R.id.button_eight);
-        buttonNine = findViewById(R.id.button_nine);
-        buttonZero = findViewById(R.id.button_zero);
-        buttonDoubleZero = findViewById(R.id.button_double_zero);
-        buttonDelete = findViewById(R.id.button_delete);
-        buttonDot = findViewById(R.id.button_dot);
-        buttonPlus = findViewById(R.id.button_plus);
-        buttonMinus = findViewById(R.id.button_minus);
-        buttonMultiply = findViewById(R.id.button_multiply);
-        buttonDivide = findViewById(R.id.button_divide);
-        seeResultBt = findViewById(R.id.button_see_result);
+        calculatedResultTextView = findViewById(R.id.calculated_result_text_view);
+        numberOneButton = findViewById(R.id.number_one_button);
+        numberTwoButton = findViewById(R.id.number_two_button);
+        numberThreeButton = findViewById(R.id.number_three_button);
+        numberFourButton = findViewById(R.id.number_four_button);
+        numberFiveButton = findViewById(R.id.number_five_button);
+        numberSixButton = findViewById(R.id.number_six_button);
+        numberSevenButton = findViewById(R.id.number_seven_button);
+        numberEightButton = findViewById(R.id.number_eight_button);
+        numberNineButton = findViewById(R.id.number_nine_button);
+        numberZeroButton = findViewById(R.id.number_zero_button);
+        numberDoubleZeroButton = findViewById(R.id.number_double_zero_button);
+        operationClearButton = findViewById(R.id.operation_clear_button);
+        dotButton = findViewById(R.id.dot_button);
+        operationAdditionButton = findViewById(R.id.operation_addition_button);
+        operationSubtractionButton = findViewById(R.id.operation_subtraction_button);
+        operationMultiplicationButton = findViewById(R.id.operation_multiplication_button);
+        operationDivisionButton = findViewById(R.id.operation_division_button);
+        seeResultButton = findViewById(R.id.see_result_button);
 
     }
 
     private void setListeners() {
-        buttonOne.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_1));
-        buttonTwo.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_2));
-        buttonThree.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_3));
-        buttonFour.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_4));
-        buttonFive.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_5));
-        buttonSix.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_6));
-        buttonSeven.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_7));
-        buttonEight.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_8));
-        buttonNine.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_9));
-        buttonZero.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_0));
-        buttonDoubleZero.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_00));
-        buttonDelete.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
-        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.DOT));
-        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
-        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_PLUS));
-        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MINUS));
-        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_DIVIDE));
-        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MULTIPLY));
-        seeResultBt.setOnClickListener(v -> {
+        numberOneButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_1));
+        numberTwoButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_2));
+        numberThreeButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_3));
+        numberFourButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_4));
+        numberFiveButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_5));
+        numberSixButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_6));
+        numberSevenButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_7));
+        numberEightButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_8));
+        numberNineButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_9));
+        numberZeroButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_0));
+        numberDoubleZeroButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_00));
+        operationClearButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
+        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.DOT));
+        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
+        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_PLUS));
+        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MINUS));
+        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_DIVIDE));
+        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MULTIPLY));
+        seeResultButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, SecondActivity.class);
-            savedResult.setLastValue(resultTv.getText().toString());
+            savedResult.setLastValue(calculatedResultTextView.getText().toString());
             intent.putExtra("resultFromMain", savedResult);
             startActivity(intent);
         });
     }
 
-    private void onNumberButtonClick(CalcSymbols value) {
-        calcModel.calcSymbolsValidation(value);
-        List<CalcSymbols> calcSymbolsList = calcModel.getCalcSymbolsList();
-        resultTv.setText(makeCalcSymbolsListToString(calcSymbolsList));
+    private void onNumberButtonClick(CalcSymbols inputSymbol) {
+        calcModel.inputValidation(inputSymbol);
+        List<CalcSymbols> calcSymbolsList = calcModel.getValidatedInput();
+        calculatedResultTextView.setText(makeCalcSymbolsListToString(calcSymbolsList));
     }
 
     private String makeCalcSymbolsListToString(List<CalcSymbols> calcSymbolsList) {
@@ -131,40 +132,40 @@ public class MainActivity extends AppCompatActivity {
         for (CalcSymbols iterator : calcSymbolsList) {
             switch (iterator) {
                 case NUM_0:
-                    symbolsToString.append(R.string.button_0);
+                    symbolsToString.append(getResources().getString(R.string.number_zero_button));
                     break;
                 case NUM_1:
-                    symbolsToString.append(R.string.button_1);
+                    symbolsToString.append(getResources().getString(R.string.number_one_button));
                     break;
                 case NUM_2:
-                    symbolsToString.append(R.string.button_2);
+                    symbolsToString.append(getResources().getString(R.string.number_two_button));
                     break;
                 case NUM_3:
-                    symbolsToString.append(R.string.button_3);
+                    symbolsToString.append(getResources().getString(R.string.number_three_button));
                     break;
                 case NUM_4:
-                    symbolsToString.append(R.string.button_4);
+                    symbolsToString.append(getResources().getString(R.string.number_four_button));
                     break;
                 case NUM_5:
-                    symbolsToString.append(R.string.button_5);
+                    symbolsToString.append(getResources().getString(R.string.number_five_button));
                     break;
                 case NUM_6:
-                    symbolsToString.append(R.string.button_6);
+                    symbolsToString.append(getResources().getString(R.string.number_six_button));
                     break;
                 case NUM_7:
-                    symbolsToString.append(R.string.button_7);
+                    symbolsToString.append(getResources().getString(R.string.number_seven_button));
                     break;
                 case NUM_8:
-                    symbolsToString.append(R.string.button_8);
+                    symbolsToString.append(getResources().getString(R.string.number_eight_button));
                     break;
                 case NUM_9:
-                    symbolsToString.append(R.string.button_9);
+                    symbolsToString.append(getResources().getString(R.string.number_nine_button));
                     break;
                 case NUM_00:
-                    symbolsToString.append(R.string.button_00);
+                    symbolsToString.append(getResources().getString(R.string.number_double_zero_button));
                     break;
                 case OP_MINUS:
-                    symbolsToString.append(R.string.button_minus);
+                    symbolsToString.append(getResources().getString(R.string.operation_subtraction_button));
                     break;
                 default:
                     symbolsToString.append("(*)");
