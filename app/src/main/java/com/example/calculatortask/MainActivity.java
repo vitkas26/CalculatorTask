@@ -3,14 +3,14 @@ package com.example.calculatortask;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,18 +34,23 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonDoubleZero;
     private Button buttonDelete;
     private Button buttonDot;
+    private Button buttonPlus;
+    private Button buttonMinus;
+    private Button buttonMultiply;
+    private Button buttonDivide;
     private Button seeResultBt;
     private Numbers savedResult = new Numbers();
+    private CalcModel calcModel = new CalcModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        View decorView = getWindow().getDecorView();
+        View hideStatusBar = getWindow().getDecorView();
 // Hide the status bar.
         int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
-        decorView.setSystemUiVisibility(uiOptions);
+        hideStatusBar.setSystemUiVisibility(uiOptions);
 
         initializeViews();
 
@@ -80,56 +85,93 @@ public class MainActivity extends AppCompatActivity {
         buttonDoubleZero = findViewById(R.id.button_double_zero);
         buttonDelete = findViewById(R.id.button_delete);
         buttonDot = findViewById(R.id.button_dot);
+        buttonPlus = findViewById(R.id.button_plus);
+        buttonMinus = findViewById(R.id.button_minus);
+        buttonMultiply = findViewById(R.id.button_multiply);
+        buttonDivide = findViewById(R.id.button_divide);
         seeResultBt = findViewById(R.id.button_see_result);
 
     }
 
     private void setListeners() {
-        buttonOne.setOnClickListener(this::onNumberButtonClick);
-        buttonTwo.setOnClickListener(this::onNumberButtonClick);
-        buttonThree.setOnClickListener(this::onNumberButtonClick);
-        buttonFour.setOnClickListener(this::onNumberButtonClick);
-        buttonFive.setOnClickListener(this::onNumberButtonClick);
-        buttonSix.setOnClickListener(this::onNumberButtonClick);
-        buttonSeven.setOnClickListener(this::onNumberButtonClick);
-        buttonEight.setOnClickListener(this::onNumberButtonClick);
-        buttonNine.setOnClickListener(this::onNumberButtonClick);
-        buttonZero.setOnClickListener(this::onNumberButtonClick);
-        buttonDoubleZero.setOnClickListener(this::onNumberButtonClick);
-        buttonDelete.setOnClickListener(this::onNumberButtonClick);
-        buttonDot.setOnClickListener(this::onNumberButtonClick);
-        seeResultBt.setOnClickListener(v-> {
-                Intent intent = new Intent(this, SecondActivity.class);
-                savedResult.setLastValue(resultTv.getText().toString());
-                intent.putExtra("resultFromMain",savedResult);
-                startActivity(intent);
+        buttonOne.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_1));
+        buttonTwo.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_2));
+        buttonThree.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_3));
+        buttonFour.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_4));
+        buttonFive.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_5));
+        buttonSix.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_6));
+        buttonSeven.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_7));
+        buttonEight.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_8));
+        buttonNine.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_9));
+        buttonZero.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_0));
+        buttonDoubleZero.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_00));
+        buttonDelete.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
+        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.DOT));
+        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
+        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_PLUS));
+        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MINUS));
+        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_DIVIDE));
+        buttonDot.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MULTIPLY));
+        seeResultBt.setOnClickListener(v -> {
+            Intent intent = new Intent(this, SecondActivity.class);
+            savedResult.setLastValue(resultTv.getText().toString());
+            intent.putExtra("resultFromMain", savedResult);
+            startActivity(intent);
         });
     }
 
-    private void onNumberButtonClick(View view) {
-        Button b = (Button) view;
-        String buttonNumber = b.getText().toString();
-        if (b.getId() == R.id.button_delete) {
-            deleteLastCharacter();
-        } else if (b.getId() == R.id.button_dot) {
-            if (!resultTv.getText().toString().contains(".")) {
-                resultTv.append(buttonNumber);
-            } else{
-                Toast.makeText(this, "Dot is exist!", Toast.LENGTH_SHORT).show();
-            }
-        } else {
-            resultTv.append(buttonNumber);
-        }
+    private void onNumberButtonClick(CalcSymbols value) {
+        calcModel.calcSymbolsValidation(value);
+        List<CalcSymbols> calcSymbolsList = calcModel.getCalcSymbolsList();
+        resultTv.setText(makeCalcSymbolsListToString(calcSymbolsList));
     }
 
-    private void deleteLastCharacter() {
-        String toRemove = resultTv.getText().toString();
-        try {
-            String editedText = toRemove.substring(0, toRemove.length() - 1);
-            resultTv.setText(editedText);
-        } catch (Exception e) {
-            Toast.makeText(this, "Field is empty", Toast.LENGTH_SHORT).show();
+    private String makeCalcSymbolsListToString(List<CalcSymbols> calcSymbolsList) {
+        StringBuilder symbolsToString = new StringBuilder();
+        for (CalcSymbols iterator : calcSymbolsList) {
+            switch (iterator) {
+                case NUM_0:
+                    symbolsToString.append(R.string.button_0);
+                    break;
+                case NUM_1:
+                    symbolsToString.append(R.string.button_1);
+                    break;
+                case NUM_2:
+                    symbolsToString.append(R.string.button_2);
+                    break;
+                case NUM_3:
+                    symbolsToString.append(R.string.button_3);
+                    break;
+                case NUM_4:
+                    symbolsToString.append(R.string.button_4);
+                    break;
+                case NUM_5:
+                    symbolsToString.append(R.string.button_5);
+                    break;
+                case NUM_6:
+                    symbolsToString.append(R.string.button_6);
+                    break;
+                case NUM_7:
+                    symbolsToString.append(R.string.button_7);
+                    break;
+                case NUM_8:
+                    symbolsToString.append(R.string.button_8);
+                    break;
+                case NUM_9:
+                    symbolsToString.append(R.string.button_9);
+                    break;
+                case NUM_00:
+                    symbolsToString.append(R.string.button_00);
+                    break;
+                case OP_MINUS:
+                    symbolsToString.append(R.string.button_minus);
+                    break;
+                default:
+                    symbolsToString.append("(*)");
+                    break;
+            }
         }
+        return symbolsToString.toString();
     }
 
     @Override
