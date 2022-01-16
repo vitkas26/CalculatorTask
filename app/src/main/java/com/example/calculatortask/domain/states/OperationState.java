@@ -1,14 +1,11 @@
 package com.example.calculatortask.domain.states;
 
-import android.media.VolumeShaper;
-import android.util.Log;
-
 import com.example.calculatortask.domain.entities.CalcSymbols;
 
 import java.util.List;
 
-public class IntState extends BaseState {
-    public IntState(List<CalcSymbols> inputSymbolsList) {
+public class OperationState extends BaseState {
+    public OperationState(List<CalcSymbols> inputSymbolsList) {
         this.inputSymbolsList.addAll(inputSymbolsList);
     }
 
@@ -35,16 +32,16 @@ public class IntState extends BaseState {
                 return new SignState();
             case OP_PLUS:
                 inputSymbolsList.add(CalcSymbols.OP_PLUS);
-                return new SignState(inputSymbolsList);
+                return new OperationState(inputSymbolsList);
             case OP_MINUS:
                 inputSymbolsList.add(CalcSymbols.OP_MINUS);
-                return new SignState(inputSymbolsList);
+                return this;
             case OP_DIVIDE:
                 inputSymbolsList.add(CalcSymbols.OP_DIVIDE);
-                return new SignState(inputSymbolsList);
+                return this;
             case OP_MULTIPLY:
                 inputSymbolsList.add(CalcSymbols.OP_MULTIPLY);
-                return new SignState(inputSymbolsList);
+                return this;
             case EQUAL:
                 inputSymbolsList.add(CalcSymbols.EQUAL);
                 return this;

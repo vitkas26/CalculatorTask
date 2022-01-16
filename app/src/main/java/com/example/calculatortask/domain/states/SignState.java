@@ -6,6 +6,14 @@ import java.util.List;
 
 public class SignState extends BaseState {
 
+    public SignState(List<CalcSymbols> inputSymbolsList) {
+        this.inputSymbolsList.addAll(inputSymbolsList);
+    }
+
+    public SignState() {
+        super();
+    }
+
     @Override
     public BaseState inputValidation(CalcSymbols inputSymbol) {
         switch (inputSymbol) {
