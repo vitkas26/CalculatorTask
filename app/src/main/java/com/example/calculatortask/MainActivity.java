@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.calculatortask.domain.CalculatorModel;
 import com.example.calculatortask.domain.entities.CalcSymbols;
-import com.example.calculatortask.domain.entities.Numbers;
+import com.example.calculatortask.domain.entities.ValuesToCalculate;
 
 import java.util.List;
 
@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private Button operationSubtractionButton;
     private Button operationMultiplicationButton;
     private Button operationDivisionButton;
+    private Button operationEqualButton;
     private Button seeResultButton;
-    private Numbers savedResult = new Numbers();
+    private ValuesToCalculate savedResult = new ValuesToCalculate();
     private CalculatorModel calcModel = new CalculatorModel();
 
     @Override
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (savedInstanceState != null && savedInstanceState.containsKey(BUNDLE_KEY)) {
             savedResult = savedInstanceState.getParcelable(BUNDLE_KEY);
-            calculatedResultTextView.setText(savedResult.getLastValue());
+            calculatedResultTextView.setText(savedResult.getSavedResultText());
         }
 
         setListeners();
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        savedResult.setLastValue(calculatedResultTextView.getText().toString());
+        savedResult.setSavedResultText(calculatedResultTextView.getText().toString());
         outState.putParcelable(BUNDLE_KEY, savedResult);
         Log.d(TAG, "onSaveInstanceState() called with: outState = [" + outState + "]");
     }
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         operationSubtractionButton = findViewById(R.id.operation_subtraction_button);
         operationMultiplicationButton = findViewById(R.id.operation_multiplication_button);
         operationDivisionButton = findViewById(R.id.operation_division_button);
+        operationEqualButton = findViewById(R.id.operation_equal_button);
         seeResultButton = findViewById(R.id.see_result_button);
 
     }
@@ -108,14 +110,14 @@ public class MainActivity extends AppCompatActivity {
         numberDoubleZeroButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.NUM_00));
         operationClearButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
         dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.DOT));
-        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.CLEAR));
-        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_PLUS));
-        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MINUS));
-        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_DIVIDE));
-        dotButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MULTIPLY));
+        operationAdditionButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_PLUS));
+        operationSubtractionButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MINUS));
+        operationDivisionButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_DIVIDE));
+        operationMultiplicationButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MULTIPLY));
+        operationEqualButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.EQUAL));
         seeResultButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, SecondActivity.class);
-            savedResult.setLastValue(calculatedResultTextView.getText().toString());
+            savedResult.setSavedResultText(calculatedResultTextView.getText().toString());
             intent.putExtra("resultFromMain", savedResult);
             startActivity(intent);
         });
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         calcModel.inputValidation(inputSymbol);
         List<CalcSymbols> calcSymbolsList = calcModel.getValidatedInput();
         calculatedResultTextView.setText(makeCalcSymbolsListToString(calcSymbolsList));
+        calcSymbolsList.removeAll(calcSymbolsList);
     }
 
     private String makeCalcSymbolsListToString(List<CalcSymbols> calcSymbolsList) {
@@ -164,9 +167,23 @@ public class MainActivity extends AppCompatActivity {
                 case NUM_00:
                     symbolsToString.append(getResources().getString(R.string.number_double_zero_button));
                     break;
+                case DOT:
+                    symbolsToString.append(getResources().getString(R.string.dot_button));
+                    break;
+                case OP_DIVIDE:
+                    symbolsToString.append(getResources().getString(R.string.operation_division_button));
+                    break;
+                case OP_PLUS:
+                    symbolsToString.append(getResources().getString(R.string.operation_addition_button));
+                    break;
+                case OP_MULTIPLY:
+                    symbolsToString.append(getResources().getString(R.string.operation_multiplication_button));
+                    break;
                 case OP_MINUS:
                     symbolsToString.append(getResources().getString(R.string.operation_subtraction_button));
                     break;
+                case EQUAL:
+                    return calcModel.calculateExpression(symbolsToString);
                 default:
                     symbolsToString.append("(*)");
                     break;

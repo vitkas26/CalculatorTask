@@ -1,13 +1,15 @@
 package com.example.calculatortask.domain.states;
 
-import android.util.Log;
-
 import com.example.calculatortask.domain.entities.CalcSymbols;
+import com.example.calculatortask.domain.entities.ValuesToCalculate;
 
 import java.util.List;
 
-public class IntState extends BaseState {
-    public IntState(List<CalcSymbols> inputSymbolsList) {
+/**
+ * Проверка ввода первого целого числа, после знака
+ */
+public class FirstIntState extends BaseState {
+    public FirstIntState(List<CalcSymbols> inputSymbolsList) {
         this.inputSymbolsList.addAll(inputSymbolsList);
     }
 
@@ -23,21 +25,17 @@ public class IntState extends BaseState {
             case NUM_7:
             case NUM_8:
             case NUM_9:
-            case NUM_0:
-            case NUM_00:
                 inputSymbolsList.add(inputSymbol);
-                return this;
+                return new IntState(inputSymbolsList);
             case DOT:
+                inputSymbolsList.add(CalcSymbols.NUM_0);
                 inputSymbolsList.add(CalcSymbols.DOT);
                 return new FloatState(inputSymbolsList);
+            case NUM_0:
+                inputSymbolsList.add(CalcSymbols.NUM_0);
+                return new ZeroState(inputSymbolsList);
             case CLEAR:
                 return new SignState();
-            case OP_PLUS:
-                inputSymbolsList.add(CalcSymbols.OP_PLUS);
-                return this;
-            case EQUAL:
-                inputSymbolsList.add(CalcSymbols.EQUAL);
-                return this;
             default:
                 return this;
         }

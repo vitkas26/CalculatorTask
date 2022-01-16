@@ -9,13 +9,6 @@ public class SignState extends BaseState {
     @Override
     public BaseState inputValidation(CalcSymbols inputSymbol) {
         switch (inputSymbol) {
-            case OP_MINUS:
-                inputSymbolsList.add(CalcSymbols.OP_MINUS);
-                return new IntState(inputSymbolsList);
-//            case OP_PLUS:
-//            case OP_DIVIDE:
-//            case OP_MULTIPLY:
-//                return new IntState(inputSymbolsList);
             case NUM_1:
             case NUM_2:
             case NUM_3:
@@ -25,19 +18,20 @@ public class SignState extends BaseState {
             case NUM_7:
             case NUM_8:
             case NUM_9:
-            case NUM_0:
-            case NUM_00:
                 inputSymbolsList.add(inputSymbol);
                 return new IntState(inputSymbolsList);
+            case OP_MINUS:
+                inputSymbolsList.add(CalcSymbols.OP_MINUS);
+                return new FirstIntState(inputSymbolsList);
+            case NUM_0:
+                inputSymbolsList.add(CalcSymbols.NUM_0);
+                return new ZeroState(inputSymbolsList);
             case DOT:
                 inputSymbolsList.add(CalcSymbols.NUM_0);
                 inputSymbolsList.add(CalcSymbols.DOT);
                 return new FloatState(inputSymbolsList);
-
             case CLEAR:
                 return new SignState();
-//            case EQUAL:
-//                break;
             default:
                 return this;
         }
