@@ -39,106 +39,60 @@ public class CalculatorModel {
         }
         ArrayList<String> operators = (ArrayList<String>) state.getListOfOperators();
         ArrayList<String> numbers = (ArrayList<String>) state.getListOfNumbers();
-            numbers.sort(Comparator.reverseOrder());
+        numbers.sort(Comparator.reverseOrder());
         Log.d("###", "numbersList: " + numbers);
         Log.d("###", "operators: " + operators);
         do {
             for (int i = 0; i < operators.size(); i++) {
                 int operatorIndex;
-                String dividend;
+                String firstNumber;
                 if (operators.get(i).equals("/")) {
                     operatorIndex = operators.indexOf(operators.get(i));
-                    if (operatorIndex == 0) {
-                        dividend = numbers.get(operatorIndex);
-                    } else {
-                        dividend = numbers.get(operatorIndex - 1);
-                    }
-                    String divider = numbers.get(operatorIndex + 1);
-                    String result = String.valueOf(Integer.parseInt(dividend) / Integer.parseInt(divider));
-                    numbers.remove(divider);
+                    firstNumber = numbers.get(operatorIndex);
+                    String secondNumber = numbers.get(operatorIndex + 1);
+                    String result = String.valueOf(Double.parseDouble(firstNumber) / Double.parseDouble(secondNumber));
+                    numbers.set(operatorIndex, result);
+                    numbers.remove(operatorIndex + 1);
                     operators.remove(operatorIndex);
-                    try {
-                        numbers.set(numbers.indexOf(dividend), result);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        numbers.set(operatorIndex, result);
-                    }
-                } else {
-                    i++;
                 }
             }
             for (int i = 0; i < operators.size(); i++) {
                 int operatorIndex;
-                String multiplicand;
+                String firstNumber;
                 if (operators.get(i).equals("*")) {
                     operatorIndex = operators.indexOf(operators.get(i));
-                    if (operatorIndex == 0) {
-                        multiplicand = numbers.get(operatorIndex);
-                    } else {
-                        multiplicand = numbers.get(operatorIndex - 1);
-                    }
-                    String multiplier = numbers.get(operatorIndex + 1);
-                    String result = String.valueOf(Integer.parseInt(multiplicand) * Integer.parseInt(multiplier));
-                    numbers.remove(multiplier);
+                    firstNumber = numbers.get(operatorIndex);
+                    String secondNumber = numbers.get(operatorIndex + 1);
+                    String result = String.valueOf(Double.parseDouble(firstNumber) * Double.parseDouble(secondNumber));
+                    numbers.set(operatorIndex, result);
+                    numbers.remove(operatorIndex + 1);
                     operators.remove(operatorIndex);
-                    try {
-                        numbers.set(numbers.indexOf(multiplicand), result);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        numbers.set(operatorIndex, result);
-                    }
                 }
             }
             for (int i = 0; i < operators.size(); i++) {
                 int operatorIndex;
-                String subtrahend;
+                String firstNumber;
                 if (operators.get(i).equals("-")) {
                     operatorIndex = operators.indexOf(operators.get(i));
-                    if (operatorIndex == 0) {
-                        subtrahend = numbers.get(operatorIndex);
-                    } else {
-                        subtrahend = numbers.get(operatorIndex - 1);
-                    }
-                    String subtractor = numbers.get(operatorIndex + 1);
-                    String result = String.valueOf(Integer.parseInt(subtrahend) - Integer.parseInt(subtractor));
-                    numbers.remove(subtractor);
+                    firstNumber = numbers.get(operatorIndex);
+                    String secondNumber = numbers.get(operatorIndex + 1);
+                    String result = String.valueOf(Double.parseDouble(firstNumber) - Double.parseDouble(secondNumber));
+                    numbers.set(operatorIndex, result);
+                    numbers.remove(operatorIndex + 1);
                     operators.remove(operatorIndex);
-                    try {
-                        numbers.set(numbers.indexOf(subtrahend), result);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        numbers.set(operatorIndex, result);
-                    }
-                } else {
-                    i++;
                 }
             }
             for (int i = 0; i < operators.size(); i++) {
                 int operatorIndex;
-                String term;
+                String firstNumber;
                 if (operators.get(i).equals("+")) {
                     operatorIndex = operators.indexOf(operators.get(i));
-                    if (operatorIndex == 0) {
-                        term = numbers.get(operatorIndex);
-                    } else {
-                        term = numbers.get(operatorIndex - 1);
-                    }
-                    String term1 = numbers.get(operatorIndex + 1);
-                    String result = String.valueOf(Integer.parseInt(term) + Integer.parseInt(term1));
-                    numbers.remove(term1);
+                    firstNumber = numbers.get(operatorIndex);
+                    String secondNumber = numbers.get(operatorIndex + 1);
+                    String result = String.valueOf(Double.parseDouble(firstNumber) + Double.parseDouble(secondNumber));
+                    numbers.set(operatorIndex, result);
+                    numbers.remove(operatorIndex + 1);
                     operators.remove(operatorIndex);
-                    try {
-                        numbers.set(numbers.indexOf(term), result);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    } finally {
-                        numbers.set(operatorIndex, result);
-                    }
-                } else {
-                    i++;
                 }
             }
         } while (numbers.size() > 1);
