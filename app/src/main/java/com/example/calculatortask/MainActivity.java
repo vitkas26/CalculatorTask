@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private SavedTextBundle savedResult = new SavedTextBundle();
     private CalculatorModel calcModel = new CalculatorModel();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
