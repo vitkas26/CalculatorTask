@@ -3,6 +3,7 @@ package com.example.calculatortask;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         operationMultiplicationButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.OP_MULTIPLY));
         operationEqualButton.setOnClickListener(v -> onNumberButtonClick(CalcSymbols.EQUAL));
         seeResultButton.setOnClickListener(v -> {
-            Intent intent = new Intent(this, SecondActivity.class);
+            Intent intent = new Intent("com.example.calculatortask.intent.action.RESULT");
             savedResult.setSavedResultText(calculatedResultTextView.getText().toString());
             intent.putExtra("resultFromMain", savedResult);
             startActivity(intent);
