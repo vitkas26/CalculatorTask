@@ -8,12 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.calculatortask.domain.entities.ValuesToCalculate;
+import com.example.calculatortask.domain.entities.SavedTextBundle;
 
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "###SecondActivity";
     private TextView secondActivityResultTv;
-    private ValuesToCalculate resultText = new ValuesToCalculate();
+    private SavedTextBundle resultText = new SavedTextBundle();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

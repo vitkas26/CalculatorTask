@@ -3,9 +3,9 @@ package com.example.calculatortask.domain.entities;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ValuesToCalculate implements Parcelable {
+public class SavedTextBundle implements Parcelable {
     private String savedResultText;
-    public ValuesToCalculate() {
+    public SavedTextBundle() {
 
     }
 
@@ -18,19 +18,19 @@ public class ValuesToCalculate implements Parcelable {
     }
 
 
-    public ValuesToCalculate(Parcel in) {
+    public SavedTextBundle(Parcel in) {
         savedResultText = in.readString();
     }
 
-    public static final Creator<ValuesToCalculate> CREATOR = new Creator<ValuesToCalculate>() {
+    public static final Creator<SavedTextBundle> CREATOR = new Creator<SavedTextBundle>() {
         @Override
-        public ValuesToCalculate createFromParcel(Parcel in) {
-            return new ValuesToCalculate(in);
+        public SavedTextBundle createFromParcel(Parcel in) {
+            return new SavedTextBundle(in);
         }
 
         @Override
-        public ValuesToCalculate[] newArray(int size) {
-            return new ValuesToCalculate[size];
+        public SavedTextBundle[] newArray(int size) {
+            return new SavedTextBundle[size];
         }
     };
 
