@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.calculatortask.domain.CalculatorModel;
 import com.example.calculatortask.domain.entities.CalcSymbols;
-import com.example.calculatortask.domain.entities.ValuesToCalculate;
+import com.example.calculatortask.domain.entities.SavedTextBundle;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private Button operationDivisionButton;
     private Button operationEqualButton;
     private Button seeResultButton;
-    private ValuesToCalculate savedResult = new ValuesToCalculate();
+    private SavedTextBundle savedResult = new SavedTextBundle();
     private CalculatorModel calcModel = new CalculatorModel();
 
     @Override
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         calcModel.inputValidation(inputSymbol);
         List<CalcSymbols> calcSymbolsList = calcModel.getValidatedInput();
         calculatedResultTextView.setText(makeCalcSymbolsListToString(calcSymbolsList));
-        calcSymbolsList.removeAll(calcSymbolsList);
+        calcSymbolsList.clear();
     }
 
     private String makeCalcSymbolsListToString(List<CalcSymbols> calcSymbolsList) {
