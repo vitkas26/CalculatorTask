@@ -8,10 +8,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.calculatortask.domain.entities.SavedTextBundle;
+
 public class SecondActivity extends AppCompatActivity {
     private static final String TAG = "###SecondActivity";
     private TextView secondActivityResultTv;
-    private Numbers resultText = new Numbers();
+    private SavedTextBundle resultText = new SavedTextBundle();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class SecondActivity extends AppCompatActivity {
 
         secondActivityResultTv = findViewById(R.id.calculated_result_text_view);
         resultText = getIntent().getExtras().getParcelable("resultFromMain");
-        secondActivityResultTv.setText(resultText.getLastValue());
+        secondActivityResultTv.setText(resultText.getSavedResultText());
     }
 
     @Override

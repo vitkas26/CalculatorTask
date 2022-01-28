@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="operation_buttons">
+        <item name="backgroundTint">@color/calculator_operation_button</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="strokeWidth">@dimen/button_stroke_size</item>
+        <item name="strokeColor">@color/button_stroke</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_width">@dimen/button_width</item>
+    </style>
+
+    <style name="number_buttons">
+        <item name="backgroundTint">@color/calculator_button</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="strokeWidth">@dimen/button_stroke_size</item>
+        <item name="strokeColor">@color/button_stroke</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_width">@dimen/button_width</item>
+    </style>
+
+    <style name="big_button">
+        <item name="backgroundTint">@color/calculator_big_button</item>
+        <item name="cornerRadius">@dimen/button_big_corner_radius</item>
+        <item name="strokeWidth">@dimen/button_stroke_size</item>
+        <item name="strokeColor">@color/button_stroke</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_width">@dimen/button_width</item>
+    </style>
+
+    <style name="see_result_button">
+        <item name="backgroundTint">@color/calculator_operation_button</item>
+        <item name="cornerRadius">@dimen/button_corner_radius</item>
+        <item name="strokeWidth">@dimen/button_stroke_size</item>
+        <item name="strokeColor">@color/button_stroke</item>
+        <item name="android:textSize">@dimen/button_text_size</item>
+        <item name="android:layout_width">@dimen/button_width</item>
+    </style>
+</resources>

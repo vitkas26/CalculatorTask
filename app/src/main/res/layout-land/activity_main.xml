@@ -15,15 +15,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:columnCount="4"
-        android:padding="@dimen/grid_layout_padding"
+        android:columnCount="6"
         android:rowCount="6"
         android:useDefaultMargins="true">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/calculated_result_text_view"
-            android:layout_columnSpan="4"
-            android:layout_gravity="fill"
+            android:layout_columnSpan="6"
+            android:layout_gravity="fill_horizontal"
             android:background="@drawable/text_view_rounded"
             android:textColor="@color/teal_700"
             android:textSize="@dimen/text_view_text_size" />
@@ -49,6 +48,14 @@
             android:text="@string/operation_addition_button" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/operation_clear_button"
+            style="@style/big_button"
+            android:layout_columnSpan="2"
+            android:layout_rowSpan="2"
+            android:layout_gravity="fill"
+            android:text="@string/operation_clear_button" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/number_seven_button"
             style="@style/number_buttons"
             android:text="@string/number_seven_button" />
@@ -62,13 +69,6 @@
             android:id="@+id/number_nine_button"
             style="@style/number_buttons"
             android:text="@string/number_nine_button" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/operation_clear_button"
-            style="@style/big_button"
-            android:layout_rowSpan="2"
-            android:layout_gravity="fill"
-            android:text="@string/operation_clear_button" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/number_four_button"
@@ -96,16 +96,17 @@
             android:text="@string/number_two_button" />
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/operation_equal_button"
+            style="@style/big_button"
+            android:layout_columnSpan="2"
+            android:layout_rowSpan="2"
+            android:layout_gravity="fill"
+            android:text="@string/operation_equal_button" />
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/number_three_button"
             style="@style/number_buttons"
             android:text="@string/number_three_button" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/operation_equal_button"
-            style="@style/big_button"
-            android:layout_rowSpan="2"
-            android:layout_gravity="fill_vertical"
-            android:text="@string/operation_equal_button" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/number_zero_button"
@@ -124,10 +125,11 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/see_result_button"
-            style="@style/see_result_button"
-            android:layout_columnSpan="4"
+            android:layout_columnSpan="6"
             android:layout_gravity="fill_horizontal"
-            android:text="@string/see_result_button" />
+            android:text="@string/see_result_button"
+            style="@style/see_result_button"/>
+
     </GridLayout>
 
 </FrameLayout>
